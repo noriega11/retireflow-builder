@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSaveRouteImport } from './routes/app.save'
 import { Route as AppProjectionRouteImport } from './routes/app.projection'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppOnboardingRouteImport } from './routes/app.onboarding'
 import { Route as AppHomeRouteImport } from './routes/app.home'
 import { Route as AppActivityRouteImport } from './routes/app.activity'
 
@@ -42,6 +43,11 @@ const AppProfileRoute = AppProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppHomeRoute = AppHomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/app/activity': typeof AppActivityRoute
   '/app/home': typeof AppHomeRoute
+  '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppRouteWithChildren
   '/app/activity': typeof AppActivityRoute
   '/app/home': typeof AppHomeRoute
+  '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/app/activity': typeof AppActivityRoute
   '/app/home': typeof AppHomeRoute
+  '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/activity'
     | '/app/home'
+    | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/activity'
     | '/app/home'
+    | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/activity'
     | '/app/home'
+    | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
@@ -153,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProfileRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/onboarding': {
+      id: '/app/onboarding'
+      path: '/onboarding'
+      fullPath: '/app/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/home': {
       id: '/app/home'
       path: '/home'
@@ -173,6 +192,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppActivityRoute: typeof AppActivityRoute
   AppHomeRoute: typeof AppHomeRoute
+  AppOnboardingRoute: typeof AppOnboardingRoute
   AppProfileRoute: typeof AppProfileRoute
   AppProjectionRoute: typeof AppProjectionRoute
   AppSaveRoute: typeof AppSaveRoute
@@ -181,6 +201,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppActivityRoute: AppActivityRoute,
   AppHomeRoute: AppHomeRoute,
+  AppOnboardingRoute: AppOnboardingRoute,
   AppProfileRoute: AppProfileRoute,
   AppProjectionRoute: AppProjectionRoute,
   AppSaveRoute: AppSaveRoute,
