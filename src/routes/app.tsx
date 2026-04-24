@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet, Link, useLocation } from "@tanstack/react-router";
-import { Home, PiggyBank, LineChart, Activity, User } from "lucide-react";
+import { Home, PiggyBank, LineChart, Trophy, User } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 import { TrustFooter } from "@/components/TrustFooter";
 import { useI18n } from "@/lib/i18n";
@@ -43,7 +43,7 @@ function BottomNav() {
     { to: "/app/home", icon: Home, label: t("tab.home") },
     { to: "/app/save", icon: PiggyBank, label: t("tab.save") },
     { to: "/app/projection", icon: LineChart, label: t("tab.projection") },
-    { to: "/app/activity", icon: Activity, label: t("tab.activity") },
+    { to: "/app/rewards", icon: Trophy, label: t("tab.rewards") },
     { to: "/app/profile", icon: User, label: t("tab.profile") },
   ] as const;
   return (

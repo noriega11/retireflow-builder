@@ -20,7 +20,8 @@ const dict: Dict = {
   // saver tabs
   "tab.home": { es: "Inicio", en: "Home" },
   "tab.save": { es: "Ahorrar", en: "Save" },
-  "tab.projection": { es: "Proyección", en: "Projection" },
+  "tab.projection": { es: "Proyección", en: "Future" },
+  "tab.rewards": { es: "Recompensas", en: "Rewards" },
   "tab.activity": { es: "Actividad", en: "Activity" },
   "tab.profile": { es: "Perfil", en: "Profile" },
 
