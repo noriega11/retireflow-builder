@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PartnerOverviewRouteImport } from './routes/partner.overview'
 import { Route as AppSaveRouteImport } from './routes/app.save'
 import { Route as AppProjectionRouteImport } from './routes/app.projection'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
@@ -18,6 +20,11 @@ import { Route as AppOnboardingRouteImport } from './routes/app.onboarding'
 import { Route as AppHomeRouteImport } from './routes/app.home'
 import { Route as AppActivityRouteImport } from './routes/app.activity'
 
+const PartnerRoute = PartnerRouteImport.update({
+  id: '/partner',
+  path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
@@ -27,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerOverviewRoute = PartnerOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => PartnerRoute,
 } as any)
 const AppSaveRoute = AppSaveRouteImport.update({
   id: '/save',
@@ -62,74 +74,94 @@ const AppActivityRoute = AppActivityRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/partner': typeof PartnerRouteWithChildren
   '/app/activity': typeof AppActivityRoute
   '/app/home': typeof AppHomeRoute
   '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
+  '/partner/overview': typeof PartnerOverviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/partner': typeof PartnerRouteWithChildren
   '/app/activity': typeof AppActivityRoute
   '/app/home': typeof AppHomeRoute
   '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
+  '/partner/overview': typeof PartnerOverviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/partner': typeof PartnerRouteWithChildren
   '/app/activity': typeof AppActivityRoute
   '/app/home': typeof AppHomeRoute
   '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
+  '/partner/overview': typeof PartnerOverviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/app'
+    | '/partner'
     | '/app/activity'
     | '/app/home'
     | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
+    | '/partner/overview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/app'
+    | '/partner'
     | '/app/activity'
     | '/app/home'
     | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
+    | '/partner/overview'
   id:
     | '__root__'
     | '/'
     | '/app'
+    | '/partner'
     | '/app/activity'
     | '/app/home'
     | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
+    | '/partner/overview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  PartnerRoute: typeof PartnerRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/partner': {
+      id: '/partner'
+      path: '/partner'
+      fullPath: '/partner'
+      preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app': {
       id: '/app'
       path: '/app'
@@ -143,6 +175,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/partner/overview': {
+      id: '/partner/overview'
+      path: '/overview'
+      fullPath: '/partner/overview'
+      preLoaderRoute: typeof PartnerOverviewRouteImport
+      parentRoute: typeof PartnerRoute
     }
     '/app/save': {
       id: '/app/save'
@@ -209,9 +248,21 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface PartnerRouteChildren {
+  PartnerOverviewRoute: typeof PartnerOverviewRoute
+}
+
+const PartnerRouteChildren: PartnerRouteChildren = {
+  PartnerOverviewRoute: PartnerOverviewRoute,
+}
+
+const PartnerRouteWithChildren =
+  PartnerRoute._addFileChildren(PartnerRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  PartnerRoute: PartnerRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
