@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { I18nProvider } from "@/lib/i18n";
 import { CurrencyProvider } from "@/lib/currency";
 import { RoleProvider } from "@/lib/role";
+import { GameProvider } from "@/lib/game";
 
 import appCss from "../styles.css?url";
 
