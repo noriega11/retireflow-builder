@@ -18,12 +18,16 @@ export function TopBar({ variant = "app" }: { variant?: "app" | "console" }) {
   return (
     <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-surface/90 px-4 backdrop-blur">
       <Link to="/" className="flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-brand-foreground font-bold">
+        <div
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-brand-foreground font-bold shadow-sm"
+          style={{ background: "var(--gradient-brand)" }}
+          aria-hidden
+        >
           R
         </div>
-        {variant === "console" && (
-          <span className="text-sm font-semibold tracking-tight text-ink">RetireFlow</span>
-        )}
+        <span className="text-sm font-semibold tracking-tight text-ink">
+          Retire<span className="text-brand">Flow</span>
+        </span>
       </Link>
       <div className="flex items-center gap-2">
         <DropdownMenu>
