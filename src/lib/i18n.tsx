@@ -84,7 +84,7 @@ interface I18nCtx {
 const Ctx = createContext<I18nCtx | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("es");
+  const [lang, setLangState] = useState<Lang>("en");
   useEffect(() => {
     const saved = (typeof window !== "undefined" && localStorage.getItem("rf.lang")) as Lang | null;
     if (saved === "es" || saved === "en") setLangState(saved);
