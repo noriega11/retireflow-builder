@@ -12,7 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PartnerTeamRouteImport } from './routes/partner.team'
+import { Route as PartnerSaversRouteImport } from './routes/partner.savers'
+import { Route as PartnerRevenueRouteImport } from './routes/partner.revenue'
 import { Route as PartnerOverviewRouteImport } from './routes/partner.overview'
+import { Route as PartnerIntegrationRouteImport } from './routes/partner.integration'
+import { Route as PartnerCampaignsRouteImport } from './routes/partner.campaigns'
 import { Route as AppSaveRouteImport } from './routes/app.save'
 import { Route as AppProjectionRouteImport } from './routes/app.projection'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
@@ -35,9 +40,34 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerTeamRoute = PartnerTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerSaversRoute = PartnerSaversRouteImport.update({
+  id: '/savers',
+  path: '/savers',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerRevenueRoute = PartnerRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
+  getParentRoute: () => PartnerRoute,
+} as any)
 const PartnerOverviewRoute = PartnerOverviewRouteImport.update({
   id: '/overview',
   path: '/overview',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerIntegrationRoute = PartnerIntegrationRouteImport.update({
+  id: '/integration',
+  path: '/integration',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerCampaignsRoute = PartnerCampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
   getParentRoute: () => PartnerRoute,
 } as any)
 const AppSaveRoute = AppSaveRouteImport.update({
@@ -81,7 +111,12 @@ export interface FileRoutesByFullPath {
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
+  '/partner/campaigns': typeof PartnerCampaignsRoute
+  '/partner/integration': typeof PartnerIntegrationRoute
   '/partner/overview': typeof PartnerOverviewRoute
+  '/partner/revenue': typeof PartnerRevenueRoute
+  '/partner/savers': typeof PartnerSaversRoute
+  '/partner/team': typeof PartnerTeamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -93,7 +128,12 @@ export interface FileRoutesByTo {
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
+  '/partner/campaigns': typeof PartnerCampaignsRoute
+  '/partner/integration': typeof PartnerIntegrationRoute
   '/partner/overview': typeof PartnerOverviewRoute
+  '/partner/revenue': typeof PartnerRevenueRoute
+  '/partner/savers': typeof PartnerSaversRoute
+  '/partner/team': typeof PartnerTeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -106,7 +146,12 @@ export interface FileRoutesById {
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
   '/app/save': typeof AppSaveRoute
+  '/partner/campaigns': typeof PartnerCampaignsRoute
+  '/partner/integration': typeof PartnerIntegrationRoute
   '/partner/overview': typeof PartnerOverviewRoute
+  '/partner/revenue': typeof PartnerRevenueRoute
+  '/partner/savers': typeof PartnerSaversRoute
+  '/partner/team': typeof PartnerTeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,7 +165,12 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
+    | '/partner/campaigns'
+    | '/partner/integration'
     | '/partner/overview'
+    | '/partner/revenue'
+    | '/partner/savers'
+    | '/partner/team'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -132,7 +182,12 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
+    | '/partner/campaigns'
+    | '/partner/integration'
     | '/partner/overview'
+    | '/partner/revenue'
+    | '/partner/savers'
+    | '/partner/team'
   id:
     | '__root__'
     | '/'
@@ -144,7 +199,12 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/projection'
     | '/app/save'
+    | '/partner/campaigns'
+    | '/partner/integration'
     | '/partner/overview'
+    | '/partner/revenue'
+    | '/partner/savers'
+    | '/partner/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -176,11 +236,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partner/team': {
+      id: '/partner/team'
+      path: '/team'
+      fullPath: '/partner/team'
+      preLoaderRoute: typeof PartnerTeamRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/savers': {
+      id: '/partner/savers'
+      path: '/savers'
+      fullPath: '/partner/savers'
+      preLoaderRoute: typeof PartnerSaversRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/revenue': {
+      id: '/partner/revenue'
+      path: '/revenue'
+      fullPath: '/partner/revenue'
+      preLoaderRoute: typeof PartnerRevenueRouteImport
+      parentRoute: typeof PartnerRoute
+    }
     '/partner/overview': {
       id: '/partner/overview'
       path: '/overview'
       fullPath: '/partner/overview'
       preLoaderRoute: typeof PartnerOverviewRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/integration': {
+      id: '/partner/integration'
+      path: '/integration'
+      fullPath: '/partner/integration'
+      preLoaderRoute: typeof PartnerIntegrationRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/campaigns': {
+      id: '/partner/campaigns'
+      path: '/campaigns'
+      fullPath: '/partner/campaigns'
+      preLoaderRoute: typeof PartnerCampaignsRouteImport
       parentRoute: typeof PartnerRoute
     }
     '/app/save': {
@@ -249,11 +344,21 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface PartnerRouteChildren {
+  PartnerCampaignsRoute: typeof PartnerCampaignsRoute
+  PartnerIntegrationRoute: typeof PartnerIntegrationRoute
   PartnerOverviewRoute: typeof PartnerOverviewRoute
+  PartnerRevenueRoute: typeof PartnerRevenueRoute
+  PartnerSaversRoute: typeof PartnerSaversRoute
+  PartnerTeamRoute: typeof PartnerTeamRoute
 }
 
 const PartnerRouteChildren: PartnerRouteChildren = {
+  PartnerCampaignsRoute: PartnerCampaignsRoute,
+  PartnerIntegrationRoute: PartnerIntegrationRoute,
   PartnerOverviewRoute: PartnerOverviewRoute,
+  PartnerRevenueRoute: PartnerRevenueRoute,
+  PartnerSaversRoute: PartnerSaversRoute,
+  PartnerTeamRoute: PartnerTeamRoute,
 }
 
 const PartnerRouteWithChildren =
