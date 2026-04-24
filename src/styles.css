@@ -172,4 +172,49 @@
   .text-success { color: var(--success); }
   .bg-warning { background-color: var(--warning); }
   .text-warning { color: var(--warning); }
+  .bg-gold { background-color: var(--gold); }
+  .text-gold { color: var(--gold); }
+  .bg-gradient-brand { background-image: var(--gradient-brand); }
+  .bg-gradient-hero { background-image: var(--gradient-hero); }
+  .bg-gradient-reward { background-image: var(--gradient-reward); }
+  .bg-gradient-mint { background-image: var(--gradient-mint); }
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .text-gradient-brand {
+    background-image: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@layer utilities {
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes float-up {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-30px); opacity: 0; }
+  }
+  @keyframes ring-glow {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 50%, transparent); }
+    50% { box-shadow: 0 0 0 8px color-mix(in oklab, var(--accent) 0%, transparent); }
+  }
+  .animate-pop { animation: pop 0.4s ease-out; }
+  .animate-ring-glow { animation: ring-glow 2s ease-in-out infinite; }
+  .animate-float-up { animation: float-up 1.2s ease-out forwards; }
+  .shimmer-gold {
+    background: linear-gradient(90deg,
+      var(--gold) 0%,
+      color-mix(in oklab, var(--gold) 60%, white) 50%,
+      var(--gold) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
 }
