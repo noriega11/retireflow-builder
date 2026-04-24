@@ -66,7 +66,9 @@ function RootComponent() {
     <I18nProvider>
       <CurrencyProvider>
         <RoleProvider>
-          <Outlet />
+          <GameProvider>
+            <Outlet />
+          </GameProvider>
         </RoleProvider>
       </CurrencyProvider>
     </I18nProvider>
