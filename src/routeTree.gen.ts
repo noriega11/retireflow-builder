@@ -20,6 +20,7 @@ import { Route as PartnerOverviewRouteImport } from './routes/partner.overview'
 import { Route as PartnerIntegrationRouteImport } from './routes/partner.integration'
 import { Route as PartnerCampaignsRouteImport } from './routes/partner.campaigns'
 import { Route as AppSaveRouteImport } from './routes/app.save'
+import { Route as AppRewardsRouteImport } from './routes/app.rewards'
 import { Route as AppProjectionRouteImport } from './routes/app.projection'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppOnboardingRouteImport } from './routes/app.onboarding'
@@ -85,6 +86,11 @@ const PartnerCampaignsRoute = PartnerCampaignsRouteImport.update({
 const AppSaveRoute = AppSaveRouteImport.update({
   id: '/save',
   path: '/save',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRewardsRoute = AppRewardsRouteImport.update({
+  id: '/rewards',
+  path: '/rewards',
   getParentRoute: () => AppRoute,
 } as any)
 const AppProjectionRoute = AppProjectionRouteImport.update({
@@ -159,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
+  '/app/rewards': typeof AppRewardsRoute
   '/app/save': typeof AppSaveRoute
   '/partner/campaigns': typeof PartnerCampaignsRoute
   '/partner/integration': typeof PartnerIntegrationRoute
@@ -183,6 +190,7 @@ export interface FileRoutesByTo {
   '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
+  '/app/rewards': typeof AppRewardsRoute
   '/app/save': typeof AppSaveRoute
   '/partner/campaigns': typeof PartnerCampaignsRoute
   '/partner/integration': typeof PartnerIntegrationRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/app/onboarding': typeof AppOnboardingRoute
   '/app/profile': typeof AppProfileRoute
   '/app/projection': typeof AppProjectionRoute
+  '/app/rewards': typeof AppRewardsRoute
   '/app/save': typeof AppSaveRoute
   '/partner/campaigns': typeof PartnerCampaignsRoute
   '/partner/integration': typeof PartnerIntegrationRoute
@@ -234,6 +243,7 @@ export interface FileRouteTypes {
     | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
+    | '/app/rewards'
     | '/app/save'
     | '/partner/campaigns'
     | '/partner/integration'
@@ -258,6 +268,7 @@ export interface FileRouteTypes {
     | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
+    | '/app/rewards'
     | '/app/save'
     | '/partner/campaigns'
     | '/partner/integration'
@@ -282,6 +293,7 @@ export interface FileRouteTypes {
     | '/app/onboarding'
     | '/app/profile'
     | '/app/projection'
+    | '/app/rewards'
     | '/app/save'
     | '/partner/campaigns'
     | '/partner/integration'
@@ -375,6 +387,13 @@ declare module '@tanstack/react-router' {
       path: '/save'
       fullPath: '/app/save'
       preLoaderRoute: typeof AppSaveRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/rewards': {
+      id: '/app/rewards'
+      path: '/rewards'
+      fullPath: '/app/rewards'
+      preLoaderRoute: typeof AppRewardsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/projection': {
@@ -483,6 +502,7 @@ interface AppRouteChildren {
   AppOnboardingRoute: typeof AppOnboardingRoute
   AppProfileRoute: typeof AppProfileRoute
   AppProjectionRoute: typeof AppProjectionRoute
+  AppRewardsRoute: typeof AppRewardsRoute
   AppSaveRoute: typeof AppSaveRoute
 }
 
@@ -492,6 +512,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppOnboardingRoute: AppOnboardingRoute,
   AppProfileRoute: AppProfileRoute,
   AppProjectionRoute: AppProjectionRoute,
+  AppRewardsRoute: AppRewardsRoute,
   AppSaveRoute: AppSaveRoute,
 }
 

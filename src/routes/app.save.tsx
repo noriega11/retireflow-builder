@@ -1,10 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, CheckCircle2, Delete } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Delete, Flame, Trophy, Zap } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useCurrency } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
 import { balanceToMonthlyIncome, currentSaver, projectBalance } from "@/lib/mock-data";
+import { useGame } from "@/lib/game";
 
 export const Route = createFileRoute("/app/save")({
   component: SaveDeposit,
@@ -13,10 +14,12 @@ export const Route = createFileRoute("/app/save")({
 function SaveDeposit() {
   const { t, lang } = useI18n();
   const { format, currency, rate } = useCurrency();
+  const { awardXp, streak } = useGame();
   const navigate = useNavigate();
   const [amount, setAmount] = useState("0");
   const [source] = useState("RappiPay •• 4821");
   const [stage, setStage] = useState<"input" | "loading" | "success">("input");
+  const [earnedXp, setEarnedXp] = useState(0);
 
   const usdAmount = parseFloat(amount || "0") / rate;
   const yearsToRetirement = currentSaver.retirementAge - currentSaver.age;
@@ -49,36 +52,69 @@ function SaveDeposit() {
   const submit = () => {
     if (usdAmount <= 0) return;
     setStage("loading");
-    setTimeout(() => setStage("success"), 1300);
+    // 10 XP base + 1 XP per dollar (capped 100), bonus +20 if streak day
+    const xp = Math.min(100, 10 + Math.round(usdAmount)) + (streak > 0 ? 20 : 0);
+    setEarnedXp(xp);
+    setTimeout(() => {
+      awardXp(xp);
+      setStage("success");
+    }, 1100);
   };
 
   if (stage === "success") {
     return (
-      <div className="flex h-full flex-col items-center justify-center px-6 py-10 text-center">
+      <div className="relative flex h-full flex-col items-center justify-center px-6 py-10 text-center">
         <Confetti />
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-success/10 text-success">
-          <CheckCircle2 className="h-12 w-12" strokeWidth={1.75} />
+        <div className="relative">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-mint text-success-foreground shadow-glow">
+            <CheckCircle2 className="h-14 w-14" strokeWidth={2} />
+          </div>
+          <div className="absolute -right-4 -top-2 animate-float-up rounded-full bg-gradient-reward px-3 py-1 text-sm font-black text-gold-foreground shadow-elevated">
+            +{earnedXp} XP
+          </div>
         </div>
-        <h1 className="mt-6 text-2xl font-bold tracking-tight text-ink">{t("save.successTitle")}</h1>
-        <p className="mt-2 text-sm text-ink-muted">
-          {t("save.successSub")}
+        <h1 className="mt-6 text-2xl font-black tracking-tight text-ink">
+          {lang === "es" ? "¡Buen depósito!" : "Nice deposit! 🎉"}
+        </h1>
+        <p className="mt-1 text-sm text-ink-muted">
+          {lang === "es" ? "Tu retiro proyectado ahora es" : "Your projected retirement is now"}
         </p>
-        <p className="mt-1 text-4xl font-bold text-brand num">{format(newProjected)}/{lang === "es" ? "mes" : "mo"}</p>
-        <p className="mt-3 text-xs text-success num">
-          +{format(monthlyAdded)}/{lang === "es" ? "mes" : "mo"} {lang === "es" ? "ganado con este depósito" : "added by this deposit"}
+        <p className="mt-2 text-4xl font-black text-gradient-brand num">
+          {format(newProjected)}/{lang === "es" ? "mes" : "mo"}
         </p>
-        <div className="mt-8 flex w-full max-w-xs flex-col gap-3">
+        <p className="mt-2 text-xs font-semibold text-success num">
+          +{format(monthlyAdded)}/{lang === "es" ? "mes" : "mo"} {lang === "es" ? "ganado" : "earned"}
+        </p>
+
+        <div className="mt-6 flex w-full max-w-xs items-center gap-2 rounded-2xl border border-border bg-surface p-3">
+          <div className="flex flex-1 items-center justify-center gap-1.5">
+            <Flame className="h-4 w-4 text-gold" />
+            <span className="text-xs font-semibold text-ink num">{streak + 1}d</span>
+          </div>
+          <div className="h-4 w-px bg-border" />
+          <div className="flex flex-1 items-center justify-center gap-1.5">
+            <Zap className="h-4 w-4 text-accent" />
+            <span className="text-xs font-semibold text-ink">Quest +1</span>
+          </div>
+          <div className="h-4 w-px bg-border" />
+          <div className="flex flex-1 items-center justify-center gap-1.5">
+            <Trophy className="h-4 w-4 text-brand" />
+            <span className="text-xs font-semibold text-ink num">+{earnedXp}</span>
+          </div>
+        </div>
+
+        <div className="mt-6 flex w-full max-w-xs flex-col gap-2">
           <Button
             onClick={() => {
               setAmount("0");
               setStage("input");
             }}
             variant="outline"
-            className="rounded-lg"
+            className="h-11 rounded-xl"
           >
             {t("save.again")}
           </Button>
-          <Button onClick={() => navigate({ to: "/app/home" })} className="rounded-lg bg-brand text-brand-foreground hover:opacity-90">
+          <Button onClick={() => navigate({ to: "/app/home" })} className="h-11 rounded-xl bg-gradient-brand text-brand-foreground hover:opacity-95">
             {t("save.home")}
           </Button>
         </div>

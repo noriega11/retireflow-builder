@@ -20,7 +20,8 @@ const dict: Dict = {
   // saver tabs
   "tab.home": { es: "Inicio", en: "Home" },
   "tab.save": { es: "Ahorrar", en: "Save" },
-  "tab.projection": { es: "Proyección", en: "Projection" },
+  "tab.projection": { es: "Proyección", en: "Future" },
+  "tab.rewards": { es: "Recompensas", en: "Rewards" },
   "tab.activity": { es: "Actividad", en: "Activity" },
   "tab.profile": { es: "Perfil", en: "Profile" },
 
@@ -84,7 +85,7 @@ interface I18nCtx {
 const Ctx = createContext<I18nCtx | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("es");
+  const [lang, setLangState] = useState<Lang>("en");
   useEffect(() => {
     const saved = (typeof window !== "undefined" && localStorage.getItem("rf.lang")) as Lang | null;
     if (saved === "es" || saved === "en") setLangState(saved);
