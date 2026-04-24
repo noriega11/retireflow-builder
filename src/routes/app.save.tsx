@@ -1,10 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, CheckCircle2, Delete } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Delete, Flame, Trophy, Zap } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useCurrency } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
 import { balanceToMonthlyIncome, currentSaver, projectBalance } from "@/lib/mock-data";
+import { useGame } from "@/lib/game";
 
 export const Route = createFileRoute("/app/save")({
   component: SaveDeposit,
@@ -13,10 +14,12 @@ export const Route = createFileRoute("/app/save")({
 function SaveDeposit() {
   const { t, lang } = useI18n();
   const { format, currency, rate } = useCurrency();
+  const { awardXp, streak } = useGame();
   const navigate = useNavigate();
   const [amount, setAmount] = useState("0");
   const [source] = useState("RappiPay •• 4821");
   const [stage, setStage] = useState<"input" | "loading" | "success">("input");
+  const [earnedXp, setEarnedXp] = useState(0);
 
   const usdAmount = parseFloat(amount || "0") / rate;
   const yearsToRetirement = currentSaver.retirementAge - currentSaver.age;
@@ -49,7 +52,13 @@ function SaveDeposit() {
   const submit = () => {
     if (usdAmount <= 0) return;
     setStage("loading");
-    setTimeout(() => setStage("success"), 1300);
+    // 10 XP base + 1 XP per dollar (capped 100), bonus +20 if streak day
+    const xp = Math.min(100, 10 + Math.round(usdAmount)) + (streak > 0 ? 20 : 0);
+    setEarnedXp(xp);
+    setTimeout(() => {
+      awardXp(xp);
+      setStage("success");
+    }, 1100);
   };
 
   if (stage === "success") {
