@@ -9,38 +9,318 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PartnerTeamRouteImport } from './routes/partner.team'
+import { Route as PartnerSaversRouteImport } from './routes/partner.savers'
+import { Route as PartnerRevenueRouteImport } from './routes/partner.revenue'
+import { Route as PartnerOverviewRouteImport } from './routes/partner.overview'
+import { Route as PartnerIntegrationRouteImport } from './routes/partner.integration'
+import { Route as PartnerCampaignsRouteImport } from './routes/partner.campaigns'
+import { Route as AppSaveRouteImport } from './routes/app.save'
+import { Route as AppProjectionRouteImport } from './routes/app.projection'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppOnboardingRouteImport } from './routes/app.onboarding'
+import { Route as AppHomeRouteImport } from './routes/app.home'
+import { Route as AppActivityRouteImport } from './routes/app.activity'
+import { Route as AdminSaversRouteImport } from './routes/admin.savers'
+import { Route as AdminPulseRouteImport } from './routes/admin.pulse'
+import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
+import { Route as AdminFundsRouteImport } from './routes/admin.funds'
+import { Route as AdminFinanceRouteImport } from './routes/admin.finance'
+import { Route as AdminComplianceRouteImport } from './routes/admin.compliance'
 
+const PartnerRoute = PartnerRouteImport.update({
+  id: '/partner',
+  path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerTeamRoute = PartnerTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerSaversRoute = PartnerSaversRouteImport.update({
+  id: '/savers',
+  path: '/savers',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerRevenueRoute = PartnerRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerOverviewRoute = PartnerOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerIntegrationRoute = PartnerIntegrationRouteImport.update({
+  id: '/integration',
+  path: '/integration',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const PartnerCampaignsRoute = PartnerCampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
+  getParentRoute: () => PartnerRoute,
+} as any)
+const AppSaveRoute = AppSaveRouteImport.update({
+  id: '/save',
+  path: '/save',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProjectionRoute = AppProjectionRouteImport.update({
+  id: '/projection',
+  path: '/projection',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHomeRoute = AppHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppActivityRoute = AppActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => AppRoute,
+} as any)
+const AdminSaversRoute = AdminSaversRouteImport.update({
+  id: '/savers',
+  path: '/savers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPulseRoute = AdminPulseRouteImport.update({
+  id: '/pulse',
+  path: '/pulse',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPartnersRoute = AdminPartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFundsRoute = AdminFundsRouteImport.update({
+  id: '/funds',
+  path: '/funds',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFinanceRoute = AdminFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminComplianceRoute = AdminComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/app': typeof AppRouteWithChildren
+  '/partner': typeof PartnerRouteWithChildren
+  '/admin/compliance': typeof AdminComplianceRoute
+  '/admin/finance': typeof AdminFinanceRoute
+  '/admin/funds': typeof AdminFundsRoute
+  '/admin/partners': typeof AdminPartnersRoute
+  '/admin/pulse': typeof AdminPulseRoute
+  '/admin/savers': typeof AdminSaversRoute
+  '/app/activity': typeof AppActivityRoute
+  '/app/home': typeof AppHomeRoute
+  '/app/onboarding': typeof AppOnboardingRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/projection': typeof AppProjectionRoute
+  '/app/save': typeof AppSaveRoute
+  '/partner/campaigns': typeof PartnerCampaignsRoute
+  '/partner/integration': typeof PartnerIntegrationRoute
+  '/partner/overview': typeof PartnerOverviewRoute
+  '/partner/revenue': typeof PartnerRevenueRoute
+  '/partner/savers': typeof PartnerSaversRoute
+  '/partner/team': typeof PartnerTeamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/app': typeof AppRouteWithChildren
+  '/partner': typeof PartnerRouteWithChildren
+  '/admin/compliance': typeof AdminComplianceRoute
+  '/admin/finance': typeof AdminFinanceRoute
+  '/admin/funds': typeof AdminFundsRoute
+  '/admin/partners': typeof AdminPartnersRoute
+  '/admin/pulse': typeof AdminPulseRoute
+  '/admin/savers': typeof AdminSaversRoute
+  '/app/activity': typeof AppActivityRoute
+  '/app/home': typeof AppHomeRoute
+  '/app/onboarding': typeof AppOnboardingRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/projection': typeof AppProjectionRoute
+  '/app/save': typeof AppSaveRoute
+  '/partner/campaigns': typeof PartnerCampaignsRoute
+  '/partner/integration': typeof PartnerIntegrationRoute
+  '/partner/overview': typeof PartnerOverviewRoute
+  '/partner/revenue': typeof PartnerRevenueRoute
+  '/partner/savers': typeof PartnerSaversRoute
+  '/partner/team': typeof PartnerTeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/app': typeof AppRouteWithChildren
+  '/partner': typeof PartnerRouteWithChildren
+  '/admin/compliance': typeof AdminComplianceRoute
+  '/admin/finance': typeof AdminFinanceRoute
+  '/admin/funds': typeof AdminFundsRoute
+  '/admin/partners': typeof AdminPartnersRoute
+  '/admin/pulse': typeof AdminPulseRoute
+  '/admin/savers': typeof AdminSaversRoute
+  '/app/activity': typeof AppActivityRoute
+  '/app/home': typeof AppHomeRoute
+  '/app/onboarding': typeof AppOnboardingRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/projection': typeof AppProjectionRoute
+  '/app/save': typeof AppSaveRoute
+  '/partner/campaigns': typeof PartnerCampaignsRoute
+  '/partner/integration': typeof PartnerIntegrationRoute
+  '/partner/overview': typeof PartnerOverviewRoute
+  '/partner/revenue': typeof PartnerRevenueRoute
+  '/partner/savers': typeof PartnerSaversRoute
+  '/partner/team': typeof PartnerTeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/app'
+    | '/partner'
+    | '/admin/compliance'
+    | '/admin/finance'
+    | '/admin/funds'
+    | '/admin/partners'
+    | '/admin/pulse'
+    | '/admin/savers'
+    | '/app/activity'
+    | '/app/home'
+    | '/app/onboarding'
+    | '/app/profile'
+    | '/app/projection'
+    | '/app/save'
+    | '/partner/campaigns'
+    | '/partner/integration'
+    | '/partner/overview'
+    | '/partner/revenue'
+    | '/partner/savers'
+    | '/partner/team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/app'
+    | '/partner'
+    | '/admin/compliance'
+    | '/admin/finance'
+    | '/admin/funds'
+    | '/admin/partners'
+    | '/admin/pulse'
+    | '/admin/savers'
+    | '/app/activity'
+    | '/app/home'
+    | '/app/onboarding'
+    | '/app/profile'
+    | '/app/projection'
+    | '/app/save'
+    | '/partner/campaigns'
+    | '/partner/integration'
+    | '/partner/overview'
+    | '/partner/revenue'
+    | '/partner/savers'
+    | '/partner/team'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/app'
+    | '/partner'
+    | '/admin/compliance'
+    | '/admin/finance'
+    | '/admin/funds'
+    | '/admin/partners'
+    | '/admin/pulse'
+    | '/admin/savers'
+    | '/app/activity'
+    | '/app/home'
+    | '/app/onboarding'
+    | '/app/profile'
+    | '/app/projection'
+    | '/app/save'
+    | '/partner/campaigns'
+    | '/partner/integration'
+    | '/partner/overview'
+    | '/partner/revenue'
+    | '/partner/savers'
+    | '/partner/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AppRoute: typeof AppRouteWithChildren
+  PartnerRoute: typeof PartnerRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/partner': {
+      id: '/partner'
+      path: '/partner'
+      fullPath: '/partner'
+      preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +328,201 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partner/team': {
+      id: '/partner/team'
+      path: '/team'
+      fullPath: '/partner/team'
+      preLoaderRoute: typeof PartnerTeamRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/savers': {
+      id: '/partner/savers'
+      path: '/savers'
+      fullPath: '/partner/savers'
+      preLoaderRoute: typeof PartnerSaversRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/revenue': {
+      id: '/partner/revenue'
+      path: '/revenue'
+      fullPath: '/partner/revenue'
+      preLoaderRoute: typeof PartnerRevenueRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/overview': {
+      id: '/partner/overview'
+      path: '/overview'
+      fullPath: '/partner/overview'
+      preLoaderRoute: typeof PartnerOverviewRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/integration': {
+      id: '/partner/integration'
+      path: '/integration'
+      fullPath: '/partner/integration'
+      preLoaderRoute: typeof PartnerIntegrationRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/partner/campaigns': {
+      id: '/partner/campaigns'
+      path: '/campaigns'
+      fullPath: '/partner/campaigns'
+      preLoaderRoute: typeof PartnerCampaignsRouteImport
+      parentRoute: typeof PartnerRoute
+    }
+    '/app/save': {
+      id: '/app/save'
+      path: '/save'
+      fullPath: '/app/save'
+      preLoaderRoute: typeof AppSaveRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/projection': {
+      id: '/app/projection'
+      path: '/projection'
+      fullPath: '/app/projection'
+      preLoaderRoute: typeof AppProjectionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/onboarding': {
+      id: '/app/onboarding'
+      path: '/onboarding'
+      fullPath: '/app/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/home': {
+      id: '/app/home'
+      path: '/home'
+      fullPath: '/app/home'
+      preLoaderRoute: typeof AppHomeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/activity': {
+      id: '/app/activity'
+      path: '/activity'
+      fullPath: '/app/activity'
+      preLoaderRoute: typeof AppActivityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/admin/savers': {
+      id: '/admin/savers'
+      path: '/savers'
+      fullPath: '/admin/savers'
+      preLoaderRoute: typeof AdminSaversRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pulse': {
+      id: '/admin/pulse'
+      path: '/pulse'
+      fullPath: '/admin/pulse'
+      preLoaderRoute: typeof AdminPulseRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/partners': {
+      id: '/admin/partners'
+      path: '/partners'
+      fullPath: '/admin/partners'
+      preLoaderRoute: typeof AdminPartnersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/funds': {
+      id: '/admin/funds'
+      path: '/funds'
+      fullPath: '/admin/funds'
+      preLoaderRoute: typeof AdminFundsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/finance': {
+      id: '/admin/finance'
+      path: '/finance'
+      fullPath: '/admin/finance'
+      preLoaderRoute: typeof AdminFinanceRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/compliance': {
+      id: '/admin/compliance'
+      path: '/compliance'
+      fullPath: '/admin/compliance'
+      preLoaderRoute: typeof AdminComplianceRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminComplianceRoute: typeof AdminComplianceRoute
+  AdminFinanceRoute: typeof AdminFinanceRoute
+  AdminFundsRoute: typeof AdminFundsRoute
+  AdminPartnersRoute: typeof AdminPartnersRoute
+  AdminPulseRoute: typeof AdminPulseRoute
+  AdminSaversRoute: typeof AdminSaversRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminComplianceRoute: AdminComplianceRoute,
+  AdminFinanceRoute: AdminFinanceRoute,
+  AdminFundsRoute: AdminFundsRoute,
+  AdminPartnersRoute: AdminPartnersRoute,
+  AdminPulseRoute: AdminPulseRoute,
+  AdminSaversRoute: AdminSaversRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface AppRouteChildren {
+  AppActivityRoute: typeof AppActivityRoute
+  AppHomeRoute: typeof AppHomeRoute
+  AppOnboardingRoute: typeof AppOnboardingRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppProjectionRoute: typeof AppProjectionRoute
+  AppSaveRoute: typeof AppSaveRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppActivityRoute: AppActivityRoute,
+  AppHomeRoute: AppHomeRoute,
+  AppOnboardingRoute: AppOnboardingRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppProjectionRoute: AppProjectionRoute,
+  AppSaveRoute: AppSaveRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface PartnerRouteChildren {
+  PartnerCampaignsRoute: typeof PartnerCampaignsRoute
+  PartnerIntegrationRoute: typeof PartnerIntegrationRoute
+  PartnerOverviewRoute: typeof PartnerOverviewRoute
+  PartnerRevenueRoute: typeof PartnerRevenueRoute
+  PartnerSaversRoute: typeof PartnerSaversRoute
+  PartnerTeamRoute: typeof PartnerTeamRoute
+}
+
+const PartnerRouteChildren: PartnerRouteChildren = {
+  PartnerCampaignsRoute: PartnerCampaignsRoute,
+  PartnerIntegrationRoute: PartnerIntegrationRoute,
+  PartnerOverviewRoute: PartnerOverviewRoute,
+  PartnerRevenueRoute: PartnerRevenueRoute,
+  PartnerSaversRoute: PartnerSaversRoute,
+  PartnerTeamRoute: PartnerTeamRoute,
+}
+
+const PartnerRouteWithChildren =
+  PartnerRoute._addFileChildren(PartnerRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AppRoute: AppRouteWithChildren,
+  PartnerRoute: PartnerRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
